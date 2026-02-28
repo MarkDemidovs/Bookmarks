@@ -13,8 +13,8 @@ export const register = async (req: Request, res: Response) => {
             [name, email, hashed]
         );
         res.status(201).json(rows[0]);
-    } catch {
-        res.status(500).json({ error: "Registration failed" });
+    } catch (err) {
+        console.log(err); 
     }
 };
 
