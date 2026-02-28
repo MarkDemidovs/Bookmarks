@@ -16,3 +16,15 @@ CREATE TABLE bookmarks (
   title      VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO users (name, email)
+VALUES 
+  ('Alice', 'alice@example.com'),
+  ('Bob', 'bob@example.com');
+
+INSERT INTO bookmarks (user_id, url, title)
+VALUES (1, 'https://example.com', 'Example Site');
+
+SELECT u.name, b.url, b.title
+FROM bookmarks b
+JOIN users u ON b.user_id = u.id;
