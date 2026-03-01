@@ -46,3 +46,16 @@ export const getUsers = async (_: Request, res: Response) => {
         res.status(500).json({ error: "Failed to fetch users" });
     }
 };
+
+export const createBookmark = async (req: Request, res: Response) => {
+    const { url, title } = req.body;
+    try {
+        const { rows } = await pool.query(
+            "INSERT INTO bookmarks (user_id, url, title) VALUES ($1, $2, $3) RETURNING *",
+            [(req as any).userId, url, title]
+        );
+        res.status(201).json(rows[0]);
+    } catch {
+        res.status(500).json({ error: "Failed to create bookmark" });
+    }
+};
