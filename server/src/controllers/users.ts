@@ -59,3 +59,16 @@ export const createBookmark = async (req: Request, res: Response) => {
         res.status(500).json({ error: "Failed to create bookmark" });
     }
 };
+
+export const deleteBookmark = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const { rows } = await pool.query("DELETE FROM bookmarks WHERE id = $1 RETURNING *", [id]);
+        if (!rows[0]) {
+            return res.status(400).json({ error: "bookmark not found "});
+        }
+        res.status(200).json(rows[0]);
+    } catch {
+        res.status(500).json({ error: "Failed to delete bookmark "});
+    }
+}
