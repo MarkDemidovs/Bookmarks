@@ -26,3 +26,12 @@ export const deleteBookmark = async (req: Request, res: Response) => {
         res.status(500).json({ error: "Failed to delete bookmark "});
     }
 }
+
+export const getAllBookmarks = async (req: Request, res: Response) =>{
+    try {
+        const { rows } = await pool.query("SELECT * FROM bookmarks WHERE user_id = $1", [(req as any).userId]);
+        res.status(200).json(rows);
+    } catch {
+        res.status(500).send({ error: "FAILED TO GET ALL BOOKMARKS!!!" })
+    }
+}

@@ -11,5 +11,5 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/users", userRouter);
-app.use("/bookmarks", bookmarkRouter)\
+app.use("/bookmarks", bookmarkRouter);
 export default app;
