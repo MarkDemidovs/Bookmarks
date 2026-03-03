@@ -4,8 +4,8 @@ import { requireAuth } from "../middleware/auth";
 
 const router = Router();
 
-router.post("/bookmarks", requireAuth, createBookmark);
-router.delete("/bookmarks/:id", requireAuth, deleteBookmark);
-router.get("/bookmarks", requireAuth, getAllBookmarks);
+router.post("/", requireAuth, createBookmark);
+router.delete("/:id", requireAuth, deleteBookmark);
+router.get("/", requireAuth, getAllBookmarks);
 
 export default router;
