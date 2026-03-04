@@ -38,14 +38,15 @@ export const getAllBookmarks = async (req: Request, res: Response) =>{
 
 export const renameBookmark = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { newName } = req.body;
+    const { newTitle } = req.body;
     try {
-        const { rows } = await pool.query("UPDATE bookmarks SET name = $1 WHERE id = $2 RETURNING *", [newName, id]);
+        const { rows } = await pool.query("UPDATE bookmarks SET title = $1 WHERE id = $2 RETURNING *", [newTitle, id]);
         if (rows.length === 0) {
             return res.status(404).send({ error: "Bookmark not found. "});
         }
         res.status(200).send(rows[0]);
-    } catch {
+    } catch (error) {
+        console.error(error);
         res.status(500).send({ error: "Failed to rename bookmark "});
     }
 }
