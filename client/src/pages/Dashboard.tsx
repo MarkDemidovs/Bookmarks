@@ -1,4 +1,5 @@
 export default function Dashboard() {
     return(<>
-    You're at the dashboard!</>)
+        <h1 className="text-5xl font-bold ">what</h1>
+    </>)
 }
