@@ -10,6 +10,7 @@ async function apiFetch<T>(
       "Content-Type": "application/json",
       ...(options?.headers || {})
     },
+    credentials: "include",
     ...options
   });
 
@@ -21,5 +22,5 @@ async function apiFetch<T>(
 }
 
 export function getAllBookmarks(): Promise<bookmarkType[]> {
-    return apiFetch<bookmarkType[]>("/bookmarks")
+    return apiFetch<bookmarkType[]>("/bookmarks") 
 }
