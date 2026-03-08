@@ -25,8 +25,8 @@ export function getAllBookmarks(): Promise<bookmarkType[]> {
     return apiFetch<bookmarkType[]>("/bookmarks") 
 }
 
-export function createBookmark(url: string, title: string): Promise<bookmarkType[]> {
-  return apiFetch<bookmarkType[]>("/bookmarks", {
+export function createBookmark(url: string, title: string): Promise<bookmarkType> {
+  return apiFetch<bookmarkType>("/bookmarks", {
     method: "POST",
     body: JSON.stringify({ url, title })
   })

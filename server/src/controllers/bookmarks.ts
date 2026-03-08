@@ -9,7 +9,8 @@ export const createBookmark = async (req: Request, res: Response) => {
             [(req as any).userId, url, title]
         );
         res.status(201).json(rows[0]);
-    } catch {
+    } catch(err){
+        console.error(err)
         res.status(500).json({ error: "Failed to create bookmark" });
     }
 };

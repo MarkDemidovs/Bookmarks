@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { bookmarkType } from "../types/bookmark";
-import { getAllBookmarks  } from "../api/bookmarks";
+import { getAllBookmarks, createBookmark } from "../api/bookmarks";
 
 export default function Dashboard() {
     const [bookmarks, setBookmarks] = useState<bookmarkType[]>([]);
@@ -23,14 +23,23 @@ export default function Dashboard() {
         load();
     }, [])
 
+
+    async function createBookmarkFunction(url: string, title: string) {
+      try {
+        const data = await createBookmark(url, title);
+        setBookmarks(prev => [...prev, data]);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     if (loading) return <div>Loading...</div>;
 
     return (
       <>
       <form>
-        <input value={url} placeholder="Enter new URL"></input>
-        <input value={title} placeholder="Enter new title"></input>
-        <button>Create</button>
+        <input value={url} placeholder="Enter new URL" onChange={e => setUrl(e.target.value)}></input>
+        <input value={title} placeholder="Enter new title" onChange={e => setTitle(e.target.value)}></input>
+        <button onClick={() => createBookmarkFunction(url, title)}>Create</button>
       </form>
       <div className="gap-6 flex flex-wrap">
         {bookmarks.map(bookmark => (
