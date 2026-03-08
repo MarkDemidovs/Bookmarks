@@ -5,6 +5,8 @@ import { getAllBookmarks  } from "../api/bookmarks";
 export default function Dashboard() {
     const [bookmarks, setBookmarks] = useState<bookmarkType[]>([]);
     const [loading, setLoading] = useState(true);
+    const [url, setUrl] = useState("");
+    const [title, setTitle] = useState("");
 
     useEffect(() => {
         async function load() {
@@ -24,6 +26,12 @@ export default function Dashboard() {
     if (loading) return <div>Loading...</div>;
 
     return (
+      <>
+      <form>
+        <input value={url} placeholder="Enter new URL"></input>
+        <input value={title} placeholder="Enter new title"></input>
+        <button>Create</button>
+      </form>
       <div className="gap-6 flex flex-wrap">
         {bookmarks.map(bookmark => (
           <div>
@@ -34,5 +42,7 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      </>
     )
 }
