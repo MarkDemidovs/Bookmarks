@@ -46,7 +46,7 @@ export default function Dashboard() {
           <div>
             <p>
               <a href={bookmark.url}>{bookmark.title}</a>
-
+              <button>DELETE THIS!!</button>
             </p>
           </div>
         ))}
