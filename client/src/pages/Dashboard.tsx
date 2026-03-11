@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { bookmarkType } from "../types/bookmark";
-import { getAllBookmarks, createBookmark } from "../api/bookmarks";
+import { getAllBookmarks, createBookmark, deleteBookmark } from "../api/bookmarks";
 
 export default function Dashboard() {
   const [bookmarks, setBookmarks] = useState<bookmarkType[]>([]);
@@ -32,6 +32,13 @@ export default function Dashboard() {
       console.log(err);
     }
   }
+  async function deleteBookmarkFunction(id: number) {
+    try {
+      await deleteBookmark(id);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -43,10 +50,10 @@ export default function Dashboard() {
       </form>
       <div className="gap-6 flex flex-wrap flex-col">
         {bookmarks.map(bookmark => (
-          <div>
+          <div key={bookmark.id}>
             <p>
               <a href={bookmark.url}>{bookmark.title}</a>
-              <button>DELETE THIS!!</button>
+              <button onClick={() => {deleteBookmarkFunction(bookmark.id)}}>DELETE THIS!!</button>
             </p>
           </div>
         ))}

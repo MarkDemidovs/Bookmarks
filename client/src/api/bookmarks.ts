@@ -31,3 +31,9 @@ export function createBookmark(url: string, title: string): Promise<bookmarkType
     body: JSON.stringify({ url, title })
   })
 }
+
+export function deleteBookmark(id: number): Promise<bookmarkType> {
+  return apiFetch<bookmarkType>(`/bookmarks/${id}`, { 
+    method: "DELETE",
+  })
+}
